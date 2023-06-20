@@ -7,7 +7,20 @@ from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 
 
-def encrypt_to_file(file: str, passphrase: str) -> None:
+def encrypt_to_file(file: str, data: str, passphrase: str) -> None:
+    """
+    Read the data from a file, encrypt it and write back to the file
+
+    Args:
+        file: path to a file
+        data: message to encrypt
+        passphrase: used to create the Fernet key
+    """
+    token = encrypt(data, passphrase)
+    with open(file, 'wb') as f:
+        f.write(token)
+
+def encrypt_file(file: str, passphrase: str) -> None:
     """
     Read the data from a file, encrypt it and write back to the file
 
