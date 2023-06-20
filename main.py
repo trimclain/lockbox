@@ -12,14 +12,19 @@ import sys
 
 # ********************************* GLOBALS ***********************************
 PATH = sys.path[0]
-DB_PATH = os.path.join(PATH, 'db')
 
-# Create Accounts folder if there is no such
+DB_PATH = os.path.join(PATH, 'db')
 if not os.path.exists(DB_PATH):
     os.mkdir(DB_PATH)
 
+PASSWD = os.path.join(PATH, '.pw')
+if not os.path.exists(PASSWD):
+    print("WELCOME!")
+    new_pas = input("Enter new root passwod: ")
+    encryptor.encrypt_to_file(PASSWD, new_pas, 'somesaltyjuicer')
+
 # TODO: 'somesaltyjuicer' could/should be changed/decided somehow
-access = decryptor.decrypt_from_file(os.path.join(PATH, '.pw'), 'somesaltyjuicer')
+access = decryptor.decrypt_from_file(PASSWD, 'somesaltyjuicer')
 
 # Customizing root
 main_font = ('Arial', 14) # 10 fonts
@@ -137,7 +142,7 @@ class addWindow:
             txtfile = os.path.join(DB_PATH, name + 'Acc.txt')
             with open(txtfile, 'w') as file:
                 file.write(f'{line1}\n{line2}')
-            encryptor.encrypt_to_file(txtfile, access)
+            encryptor.encrypt_file(txtfile, access)
             messagebox.showinfo('Success', '{} was successfuly added!'.format(name))
             self.window.focus_force()
             self.accname.focus()
@@ -209,7 +214,7 @@ class NameOrPasChangeWindow:
             self.en_box.delete(0, 'end')
             with open(os.path.join(PATH, '.pw.txt'), 'w') as f:
                 f.write(enteredpass)
-            encryptor.encrypt_to_file(os.path.join(PATH, '.pw.txt'), 'somesaltyjuicer')
+            encryptor.encrypt_file(os.path.join(PATH, '.pw.txt'), 'somesaltyjuicer')
             ok = messagebox.showinfo('Success', 'Password updated successfuly')
             if ok == 'ok':
                 self.on_closing()
@@ -323,6 +328,7 @@ option_menu.add_command(label='Change Show Button Color')
 option_menu.add_command(label='Change Delete Button Color')
 
 
+# TODO: fix this
 # Change Password item
 change_pass_menu = tk.Menu(menubar)
 menubar.add_cascade(label='Password', menu=change_pass_menu)
