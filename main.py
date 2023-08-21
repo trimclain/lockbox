@@ -1,5 +1,9 @@
 #!/home/trimclain/projects/personal/lockbox/venv/bin/python
 
+# TODO: update shebang
+
+# TODO: rename classes using PascalCase and functions using camelCase
+
 from scripts import encryptor
 from scripts import decryptor
 from scripts import rpg
