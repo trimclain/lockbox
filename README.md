@@ -1,21 +1,24 @@
 # LockBox
 
-A very simple offline Password Manager.
+A very simple offline Password Manager
 
 ## Installation
 
-1. Install Tkinter
-- Arch:
+1. Install required software
 ```
-sudo pacman -S tk
+make
+```
+2. Source the venv
+```
+source venv/bin/activate
+```
+3. Install required modules
+```
+make reqs
 ```
 
-- Ubuntu:
+## How to use
+Run
 ```
-sudo apt install python3-tk
-```
-
-2. Install the cryptography module
-```
-pip install cryptography
+./main.py
 ```
