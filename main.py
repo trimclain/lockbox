@@ -24,7 +24,7 @@ if not os.path.exists(DB_PATH):
 PASSWD = os.path.join(PATH, '.pw')
 if not os.path.exists(PASSWD):
     print("WELCOME!")
-    new_pas = input("Enter new root passwod: ")
+    new_pas = input("Enter new root password: ")
     encryptor.encrypt_to_file(PASSWD, new_pas, 'somesaltyjuicer')
 
 # TODO: 'somesaltyjuicer' could/should be changed/decided somehow
