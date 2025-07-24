@@ -57,25 +57,30 @@ class PopupWindow:
         top.title("")
         top.geometry("{}x{}+{}+{}".format(pW_width, pW_height, pW_x, pW_y))
         top.resizable(width=False, height=False)
-        icon1 = tk.PhotoImage(file=os.path.join(
-            PATH, "img", "icon3.png"))  # Icon
+        icon1 = tk.PhotoImage(
+            file=os.path.join(PATH, "img", "icon3.png")
+        )
         top.tk.call("wm", "iconphoto", top._w, icon1)
         top.focus_force()
-        self.l = tk.Label(top, text=" Password: ", font=(
-            "Bitstream Vera Serif", 15), justify=tk.CENTER)
-        self.l.pack(pady=3)
-        self.e = tk.Entry(top, show="*", width=25, bd=3)
-        self.e.pack(pady=7)
-        self.e.bind("<Return>", self.cleanup)
-        self.b = tk.Button(top, text="Submit",
-                           command=self.cleanup, font=main_font, bd=2)
+        self.popup_window_label = tk.Label(
+            top, text=" Password: ",
+            font=("Bitstream Vera Serif", 15),
+            justify=tk.CENTER
+        )
+        self.popup_window_label.pack(pady=3)
+        self.popup_window_entry = tk.Entry(top, show="*", width=25, bd=3)
+        self.popup_window_entry.pack(pady=7)
+        self.popup_window_entry.bind("<Return>", self.cleanup)
+        self.b = tk.Button(
+            top, text="Submit", command=self.cleanup, font=main_font, bd=2
+        )
         self.b.pack(pady=3)
-        self.e.focus()
+        self.popup_window_entry.focus()
         # do after close button pressed
         top.protocol("WM_DELETE_WINDOW", self.on_closing)
 
     def cleanup(self, event=None):
-        self.value = self.e.get()
+        self.value = self.popup_window_entry.get()
         if self.value:
             if self.value == access:
                 self.top.destroy()
@@ -84,11 +89,13 @@ class PopupWindow:
                 self.attempts += 1
                 if self.attempts == 3:
                     root.quit()
-                self.e .delete(0, "end")
+                self.popup_window_entry .delete(0, "end")
                 messagebox.showerror(
-                    "Incorrect Password", "Wrong password!\nRemaining attempts: " + str(3 - self.attempts))
+                    "Incorrect Password", "Wrong password!\nRemaining attempts: "
+                    + str(3 - self.attempts)
+                )
                 self.top.focus_force()
-                self.e.focus()
+                self.popup_window_entry.focus()
 
     def on_closing(self):
         self.top.destroy()
@@ -103,8 +110,9 @@ class AddWindow:
         window.title("Account List")
         window.geometry("{}x{}+{}+{}".format(aW_width, aW_height, aW_x, aW_y))
         window.resizable(width=False, height=False)
-        icon2 = tk.PhotoImage(file=os.path.join(
-            PATH, "img", "icon3.png"))  # Icon
+        icon2 = tk.PhotoImage(
+            file=os.path.join(PATH, "img", "icon3.png")
+        )
         window.tk.call("wm", "iconphoto", window._w, icon2)
         window.focus_force()
 
