@@ -1,6 +1,4 @@
-#!/home/trimclain/projects/personal/lockbox/venv/bin/python
-
-# TODO: update shebang
+#!/usr/bin/env python3
 
 # TODO: rename classes using PascalCase and functions using camelCase
 
