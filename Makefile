@@ -95,4 +95,24 @@ reqs: distrocheck
 		echo "cryptography module is already installed"; \
 	fi
 
+install: distrocheck
+	@make software
+	@make reqs
+	@echo "Installing Lockbox to ~/.local/bin..."
+	@mkdir -p ~/.local/bin
+	@rm -f ~/.local/bin/lockbox
+	@echo -e "#!/usr/bin/env bash\npushd $$(pwd) > /dev/null && ./main.py && popd > /dev/null" > ~/.local/bin/lockbox
+	@chmod +x ~/.local/bin/lockbox
+	@echo "Lockbox was successfully installed"
+
+uninstall: distrocheck
+	@# Delete the executable in .local/bin
+	@if [[ -f ~/.local/bin/lockbox ]]; then \
+		echo "Uninstalling Lockbox from .local/bin..."; \
+		rm -f ~/.local/bin/lockbox; \
+		echo "Lockbox was successfully uninstalled"; \
+	else \
+		echo "Lockbox is already uninstalled"; \
+	fi
+
 .PHONY: all distrocheck help software reqs install uninstall
