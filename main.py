@@ -10,10 +10,6 @@ from scripts import decryptor, encryptor, rpg
 # ********************************* GLOBALS ***********************************
 PATH = sys.path[0]
 
-DB_PATH = os.path.join(PATH, "db")
-if not os.path.exists(DB_PATH):
-    os.mkdir(DB_PATH)
-
 PASSWD = os.path.join(PATH, ".pw")
 if not os.path.isfile(PASSWD):
     print("WELCOME!")
@@ -23,6 +19,10 @@ if not os.path.isfile(PASSWD):
     except KeyboardInterrupt:
         print("\nBye.")
         sys.exit(0)
+
+DB_PATH = os.path.join(PATH, ".db")
+if not os.path.exists(DB_PATH):
+    os.mkdir(DB_PATH)
 
 # TODO: "somesaltyjuicer" could/should be changed/decided somehow
 access = decryptor.decrypt_from_file(PASSWD, "somesaltyjuicer")
